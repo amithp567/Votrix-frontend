@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .no-spinner {
+    appearance: textfield;
+  }
+
+  .no-spinner::-webkit-inner-spin-button,
+  .no-spinner::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+}
