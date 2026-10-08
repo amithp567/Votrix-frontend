@@ -11,3 +11,17 @@
     margin: 0;
   }
 }
+
+/* home page boxes */
+@utility box-block{
+  @apply
+  flex flex-col items-center gap-2 justify-around 
+  w-70 h-70 p-2 rounded-xl outline-1  
+  hover:scale-101 transition-transform duration-100;
+}
+
+@utility box-block-button{
+  @apply 
+  px-4 py-2 rounded-xl w-60 h-12 text-sm text-white font-semibold 
+  inline-flex gap-2 items-center justify-center;
+}
