@@ -1,31 +1,54 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { officialLogin } from '../../api/api'
 
 const OfficialLogin = () => {
   const navigate = useNavigate()
-  const [username,setUsername]=useState('')
-  const [password,setPassword]=useState('')
   const [error,setError]=useState('')
+
   const handleSubmit=async(e)=>{
     e.preventDefault()
     setError("")
-    if(!username || !password){
+    const formdata = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formdata.entries())
+    if(!data.username || !data.password){
       setError('User name and password is required!.')
       return
     }
     try{
-      await axios.post('http://127.0.0.1:8000/api/users/official/login/',{username:username,password:password})
-      navigate('/official/dashboard')
+      const response = await officialLogin(data);
+
+      localStorage.setItem("access", response.access);
+      localStorage.setItem("refresh", response.refresh);
+      localStorage.setItem("role", response.profile.role);
+      localStorage.setItem("username", response.profile.username);
+
+      navigate("/official/dashboard", { replace: true });
+
     }catch(err){
-      setError('Invalid credentials')
+      const error = err.response?.data
+      setError(
+        error?.detail,
+        error?.message,
+        'Invalid credentials'
+      )
+
     }
   }
 
   return (
-    <div className="w-full min-h-screen bg-gray-200 flex items-center justify-center">
-      
-      <form className="max-w-md w-full bg-white p-6 rounded-lg shadow" onSubmit={handleSubmit}>
+    <div
+      className="w-full min-h-screen 
+      flex items-center justify-center 
+      bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/background.png')" }}>  
+
+      <form 
+      className="max-w-sm md:max-w-lg w-full bg-gray-50  p-6 rounded-lg shadow p-2" 
+      onSubmit={handleSubmit}>
+
         <h2 className="text-2xl font-bold text-center mb-6">
           Official Login
         </h2>
@@ -37,9 +60,8 @@ const OfficialLogin = () => {
           </label>
           <input
             type="text"
-            className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-            onChange={(e)=>setUsername(e.target.value)}
-          />
+            className="inp-box"
+            name='username'/>
         </div>
 
         <div className="mb-4">
@@ -48,23 +70,24 @@ const OfficialLogin = () => {
           </label>
           <input
             type="password"
-            className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-            onChange={(e)=>setPassword(e.target.value)}
-          />
+            className="inp-box"
+            name='password'/>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+          className="submit-btn"
         >
           Login
         </button>
 
         <p className="text-sm text-center mt-4 text-gray-600">
           Forgot password?
-          <span className="text-blue-600 hover:underline ml-1 cursor-pointer">
-            Click here
-          </span> 
+          <Link to='#'>
+            <span className="text-blue-600 hover:underline ml-1 cursor-pointer">
+              Click here
+            </span> 
+          </Link>
         </p>
       </form>
 
