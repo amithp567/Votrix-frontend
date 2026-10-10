@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify';
 import { officialLogin } from '../../api/api'
 
 const OfficialLogin = () => {
@@ -24,7 +24,7 @@ const OfficialLogin = () => {
       localStorage.setItem("refresh", response.refresh);
       localStorage.setItem("role", response.profile.role);
       localStorage.setItem("username", response.profile.username);
-
+      toast.success("Logged in successfully!");
       navigate("/official/dashboard", { replace: true });
 
     }catch(err){
