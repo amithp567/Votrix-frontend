@@ -16,3 +16,9 @@ export const officialLogin = async(data) =>{
     )
     return response.data
 }
+
+
+export const Logout = async (data) => {
+  const response = await api.post('logout/', data);
+  return response.data;
+};

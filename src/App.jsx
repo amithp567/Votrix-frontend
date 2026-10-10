@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './Home'
 import OfficialLogin from './pages/official/OfficialLogin'
 import Official from './pages/official/Official'
@@ -14,15 +16,23 @@ import ApprovalPage from './pages/official/ApprovelPage'
 import VoterList from './pages/official/VoterList'
 import ElectionPage from './pages/official/ElectionPage'
 import CommissionerGuard from './guards/CommissionerGuard'
-import CommissionerGuestGuard from './guards/CommissionerGuestGuard'
+import GuestGuard from './guards/GuestGuard'
 
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            theme="light"
+            closeOnClick
+            pauseOnHover
+            draggable
+          />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route element={<CommissionerGuestGuard/>}>
+        <Route element={<GuestGuard/>}>
+          <Route path='/' element={<Home />} />
           <Route path='/official/login' element={<OfficialLogin />} />
         </Route>
 

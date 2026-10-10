@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-const CommissionerGuestGuard = () => {
+const GuestGuard = () => {
   const access = localStorage.getItem("access");
   const role = localStorage.getItem("role");
 
@@ -8,7 +8,11 @@ const CommissionerGuestGuard = () => {
     return <Navigate to="/official/dashboard" replace />;
   }
 
+  if (access && role === "Agent") {
+    return <Navigate to="/agent/dashboard" replace />;
+  }
+
   return <Outlet />;
 };
 
-export default CommissionerGuestGuard;
+export default GuestGuard;
