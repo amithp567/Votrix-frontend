@@ -68,11 +68,9 @@ const OfficialNavbar = ({ className = '' }) => {
             <h2 className="text-xl font-bold text-gray-900">
               Confirm Logout
             </h2>
-
             <p className="mt-3 text-sm text-gray-600">
               Are you sure you want to log out of your account?
             </p>
-
             <div className="mt-6 flex justify-end gap-3">
               <button
                 type="button"
@@ -80,19 +78,16 @@ const OfficialNavbar = ({ className = '' }) => {
                 disabled={isLoggingOut}
                 className="
                 rounded-lg border border-gray-300 w-20 py-2 
-                text-gray-700 hover:bg-gray-100 disabled:opacity-50"
-              >
+                text-gray-700 hover:bg-gray-100 disabled:opacity-50">
                 No
               </button>
-
               <button
                 type="button"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
                 className="
                 rounded-lg bg-red-600 w-20 py-2 text-white 
-                hover:bg-red-700 disabled:opacity-50"
-              >
+                hover:bg-red-700 disabled:opacity-50">
                 {isLoggingOut ? 'Processing...' : 'Yes'}
               </button>
             </div>
