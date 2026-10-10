@@ -10,11 +10,12 @@ import OfficialNavbar from "../../components/OfficialNavbar";
 const Official = () => {
   const navigate=useNavigate()
   return (
-  <div className="min-h-screen">
+  <div>
+    <OfficialNavbar/>
 
-    <OfficialNavbar className="fixed top-0 left-0 w-full z-10"/>
-
-    <div className="w-full min-h-screen flex justify-center items-center gap-5 flex-wrap pt-25 pb-5">
+    <div className="
+      w-full min-h-screen pt-25 pb-5
+      flex justify-center items-center gap-5 flex-wrap">
       <div className="box-block bg-blue-50 outline-blue-100">
         <div className="bg-blue-200 text-blue-800 rounded-xl p-3">
           <MdHowToVote className="w-10 h-10"/>
@@ -97,7 +98,6 @@ const Official = () => {
     </div>
 
     <Footer />
-
     </div>
   )
 }
