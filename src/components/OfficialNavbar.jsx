@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Logout } from '../api/api';
 
-const OfficialNavbar = ({ className = '' }) => {
+const OfficialNavbar = () => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -25,10 +25,11 @@ const OfficialNavbar = ({ className = '' }) => {
         setShowLogoutModal(false);
         navigate('/', { replace: true });
     } catch (error) {
-      const message =
+      const message =(
         error.response?.data?.detail ||
         error.response?.data?.message ||
-        'Logout failed. Please try again.';
+        'Logout failed. Please try again.'
+      );
 
       toast.error(message);
     } finally {
@@ -39,9 +40,9 @@ const OfficialNavbar = ({ className = '' }) => {
   return (
     <>
       <div
-        className={`${className} h-20 flex items-center justify-around
-        bg-gray-50 border-b border-gray-200`}
-      >
+        className="h-20 flex items-center justify-around
+        bg-gray-50 border-b border-gray-200
+        fixed top-0 left-0 w-full z-10">
         <div className="text-4xl font-black text-blue-800">
           Votrix
         </div>
@@ -54,8 +55,7 @@ const OfficialNavbar = ({ className = '' }) => {
           <button
             type="button"
             onClick={() => setShowLogoutModal(true)}
-            className="text-red-600 hover:text-red-700 font-medium"
-          >
+            className="text-red-600 hover:text-red-700 font-medium">
             Logout
           </button>
         </div>

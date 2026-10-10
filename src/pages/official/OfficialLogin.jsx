@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -26,15 +25,13 @@ const OfficialLogin = () => {
       localStorage.setItem("username", response.profile.username);
       toast.success("Logged in successfully!");
       navigate("/official/dashboard", { replace: true });
-
-    }catch(err){
-      const error = err.response?.data
-      setError(
-        error?.detail,
-        error?.message,
-        'Invalid credentials'
-      )
-
+    }catch(error){
+      const message =(
+      error.response?.data?.detail ||
+      error.response?.data?.message ||
+      "Something went wrong"
+      );
+      setError(message)
     }
   }
 
